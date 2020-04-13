@@ -1,0 +1,1198 @@
+/*
+shift strg p -> kommandozeile wird geöffnet (z.B. autoprefixer)
+
+strg f -> suchfunktion wird geöffnet
+
+strg shift / -> kommentar einfügen
+
+shift enter -> mit emmet vervollständigen
+
+shift alt m -> um css und js mit einem minifier zu verkleinern (weniger ladezeit)
+*/
+
+
+/* Farben für das Projekt
+
+Blau:          #1F4E8C
+Grau dunkel:   #3D3F45
+Grau hell:     #F0F0F0
+Rot:           #A62C21 */
+
+/* === Fonts === */
+
+/* raleway-regular - latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/raleway-v14-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Raleway'), local('Raleway-Regular'),
+       url('../fonts/raleway-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/raleway-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/raleway-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/raleway-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/raleway-v14-latin-regular.svg#Raleway') format('svg'); /* Legacy iOS */
+}
+/* raleway-italic - latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: italic;
+  font-weight: 400;
+  src: url('../fonts/raleway-v14-latin-italic.eot'); /* IE9 Compat Modes */
+  src: local('Raleway Italic'), local('Raleway-Italic'),
+       url('../fonts/raleway-v14-latin-italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/raleway-v14-latin-italic.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/raleway-v14-latin-italic.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/raleway-v14-latin-italic.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/raleway-v14-latin-italic.svg#Raleway') format('svg'); /* Legacy iOS */
+}
+/* raleway-700 - latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/raleway-v14-latin-700.eot'); /* IE9 Compat Modes */
+  src: local('Raleway Bold'), local('Raleway-Bold'),
+       url('../fonts/raleway-v14-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/raleway-v14-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/raleway-v14-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/raleway-v14-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/raleway-v14-latin-700.svg#Raleway') format('svg'); /* Legacy iOS */
+}
+/* raleway-700italic - latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../fonts/raleway-v14-latin-700italic.eot'); /* IE9 Compat Modes */
+  src: local('Raleway Bold Italic'), local('Raleway-BoldItalic'),
+       url('../fonts/raleway-v14-latin-700italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/raleway-v14-latin-700italic.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/raleway-v14-latin-700italic.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/raleway-v14-latin-700italic.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/raleway-v14-latin-700italic.svg#Raleway') format('svg'); /* Legacy iOS */
+}
+
+/* ===Global=== */
+
+html{
+  font-size: 16px;
+  /* Das html-Element ist das root-element, alle rem-angaben (root-element) beziehen
+  sich auf dieses Element. */
+}
+
+body{
+  margin: 0;
+  font-family: 'Raleway', 'Lato', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+*{
+  box-sizing: border-box;
+  /* Gleich zu Begin einstellen damit alle Eigenschaften die selbe größe haben. */
+}
+
+section{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 1366px){
+
+  section{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+ }
+}
+
+@media (max-width: 1024px){
+
+  section{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+ }
+}
+
+@media (max-width: 768px){
+
+  section{
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+}
+
+:focus{
+  outline: none;
+  box-shadow: 0 0 2px 2px #F0F0F0, 0 0 10px #F0F0F0;
+  /* Der erste box-shadow ist für die innere Darstellung. */
+}
+
+
+/* ===Generelles=== */
+
+.clearfix::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.active{
+  background-color: #A62C21 !important;
+}
+/*
+Mit "!important" werden andere stylingelemente für diesen selektor überschrieben.
+Wir sagen das dieses Element unbedingt so ausgeführt werden soll. Dies ist aber eher
+unüblich. Besser wäre es wenn wir einen zweiten selektor gebaut hätten der das gleiche
+Feld anvisiert. In diesem Fall wäre das folgender selektor: "mobile-nav-content > ul > .active"!
+Es steht unter Generelles da es zur normalen und zur mobilen Navigationsleiste gehört.
+*/
+
+.wichtiger-text {
+  font-weight: bold;
+}
+
+.screenreader{
+  display: none;
+}
+
+.intro-container{
+  text-align: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  /* Mit den beiden margin Eigenschaften stellen wir sicher das das Element mittig
+  angezeigt wird. */
+  margin-bottom: 2rem;
+}
+
+.intro-container > h1{
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.intro-container > p{
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1366px){
+
+  .intro-container{
+    width: 90%;
+  }
+
+  .intro-container > p{
+    margin-bottom: .5rem;
+  }
+}
+
+@media (max-width: 1024px){
+
+  .intro-container{
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .intro-container > p{
+    margin-bottom: 0;
+ }
+}
+
+
+/* === Buttons === */
+
+.btn-typ-1{
+  background-color: #A62C21;
+  border: 2px solid #A62C21;
+  color: #FFF;
+  padding: .4rem .6rem;
+  transition: border .5s ease-in-out;
+}
+
+.btn-typ-1:hover{
+  border: 2px solid #FFF;
+  font-weight: normal;
+}
+
+.btn-typ-2{
+  background-color: transparent;
+  border: 2px solid #FFF;
+  color: #FFF;
+  padding: .4rem .6rem;
+  transition: color .5s ease-in-out, border .5s ease-in-out;
+}
+
+.btn-typ-2:hover{
+  color: #A62C21;
+  border: 2px solid #A62C21;
+  font-weight: normal;
+}
+
+.button-typ-3{
+  background-color: transparent;
+  border: 2px solid #3D3F45;
+  color: #3D3F45;
+  font-size: 1rem;
+  transition: border .5s ease-in-out;
+}
+
+.button-typ-3:hover{
+  border: 2px solid #A62C21;
+  font-weight: normal;
+}
+
+
+/* ===Navigationsleiste=== */
+
+#header-nav{
+  height: 50px;
+  width: 100%;
+  background-color: #3D3F45;
+  position: relative;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#header-nav ul{
+  margin: 0;
+  padding: 0;
+  float: right;
+  height: 100%;
+}
+
+#header-nav ul > li{
+  display: inline-block;
+  height: 100%;
+  padding: 0 .4rem 0 .4rem;
+}
+
+#header-nav ul > li > a{
+  display: inline-block;
+  margin-top: .8rem;
+  /* a-Elemente sind inline-Elemente, diesen kann man kein padding geben. Aus diesem
+  Grund wird die display Eigenschaft auf inline-block geändert. */
+}
+
+#header-nav a > img{
+  height: 30px;
+  width: auto;
+  float: left;
+  margin: .55rem;
+}
+
+#header-nav .col-6 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#header-nav ul > li > a:link{
+  color: #FFF;
+  text-decoration: none;
+}
+
+#header-nav ul > li > a:visited{
+  color: #FFF;
+  text-decoration: none;
+}
+
+#header-nav ul > li > a:active{
+  color: #F0F0F0;
+  text-decoration: none;
+}
+
+#header-nav ul > li > a:hover{
+  color: #F0F0F0;
+  text-decoration: none;
+}
+
+#header-nav .container,
+#header-nav .row,
+#header-nav .col-6{
+  height: 100%;
+}
+
+.logo-link{
+  display: inline-block;
+}
+
+/* ===Navigationsleiste (Mobile)=== */
+
+#mobile-nav-button{
+  color: #FFF;
+  float: right;
+  font-size: 2rem;
+  border: 2px solid #FFF;
+  width: 37px;
+  height: 37px;
+  position: relative;
+  margin-top: .4rem;
+  margin-bottom: .5rem;
+}
+
+#mobile-nav-button > span{
+  position: absolute;
+  bottom: -2px;
+  left: 7px;
+}
+
+#mobile-nav-content > ul > li {
+  display: block;
+  background: #3D3F45;
+  height: 50px;
+  padding: 0 1.2rem;
+  text-align: center;
+}
+
+#mobile-nav-dropdown{
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+
+#mobile-nav-content{
+  position: absolute;
+  right: 0;
+  top: 50px;
+  display: none;
+}
+
+#mobile-nav-dropdown:hover > #mobile-nav-content{
+  display: block;
+}
+
+#mobile-nav{
+  display: none;
+}
+
+@media (max-width: 768px){
+  #desktop-nav{
+    display: none;
+  }
+  #mobile-nav{
+    display: block;
+  }
+}
+
+/* === Header-Banner === */
+
+#header-banner{
+  background: url("../img/hintergrund.jpg") no-repeat;
+  width: 100%;
+  height: 0;
+  padding-top: 20.83%;
+  background-size: contain;
+}
+
+#header-banner-klein{
+  background: url("../img/hintergrund-klein.jpg") no-repeat;
+  width: 100%;
+  height: 0;
+  padding-top: 15.625%;
+  background-size: contain;
+}
+
+/* Berechnung für padding-top:
+
+1920 x 400 -> größe von hintergrund.jpg
+
+Wieviel % von 1920px sind 400px?
+
+400 / 1920 * 100 = 20.83
+
+300 /1920 * 100 = 15.625
+
+Die höhe des Hintergrundbildes wird jetzt durch die größe des Elements berechnet das es beinhaltet.
+Das heißt wann immer der viewport verkleinert wird, wird auch die größe des Hintergrundbildes neu
+berechnet. */
+
+/* === Newsletter-Bereich === */
+
+#newsletter-bereich{
+  width: 100%;
+  background: #3D3F45;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+#nb-werbetext{
+  color: #FFF;
+}
+
+#nb-form{
+    margin-top: .7rem;
+    float: right;
+    width: 100%;
+    text-align: right;
+}
+
+#nb-email-input{
+  width: 70%;
+  height: 35px;
+  border: 2px solid #FFF;
+  padding: .4rem;
+}
+
+#nb-btn{
+  height: 35px;
+}
+
+@media (max-width: 1386px) {
+
+  #nb-email-input{
+    width: 65%;
+  }
+}
+
+@media (max-width: 1200px) {
+
+  #nb-email-input{
+    width: 100%;
+    margin-bottom: .5rem;
+  }
+
+  #nb-btn{
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px){
+
+  #nb-werbetext{
+    display: none;
+  }
+
+  #nb-form{
+    margin-top: 0;
+  }
+
+  #newsletter-bereich .col-4{
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+
+  #nb-email-input{
+    height: 25px;
+  }
+
+  #nb-btn{
+    height: 25px;
+    padding: .1rem
+  }
+
+}
+
+
+/* === Animiertes Logo === */
+
+@-webkit-keyframes logoAnimation {
+  0%         {transform: rotateZ(0deg); }
+  11.111%    {transform: rotateZ(0deg); }
+  22.222%    {transform: rotateZ(90deg); }
+  33.333%    {transform: rotateZ(90deg); }
+  44.444%    {transform: rotateZ(180deg); }
+  55.555%    {transform: rotateZ(180deg); }
+  66.666%    {transform: rotateZ(270deg); }
+  77.777%    {transform: rotateZ(270deg); }
+  88.888%    {transform: rotateZ(360deg); }
+  100%    	 {transform: rotateZ(360deg); }
+}
+
+@keyframes logoAnimation {
+  0%         {transform: rotateZ(0deg); }
+  11.111%    {transform: rotateZ(0deg); }
+  22.222%    {transform: rotateZ(90deg); }
+  33.333%    {transform: rotateZ(90deg); }
+  44.444%    {transform: rotateZ(180deg); }
+  55.555%    {transform: rotateZ(180deg); }
+  66.666%    {transform: rotateZ(270deg); }
+  77.777%    {transform: rotateZ(270deg); }
+  88.888%    {transform: rotateZ(360deg); }
+  100%    	 {transform: rotateZ(360deg); }
+}
+
+#animiertes-logo{
+  height: 150px;
+  width: 150px;
+  background-color: #3D3F45;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem;
+  padding: 25px;
+}
+
+#animiertes-logo > img{
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-right: auto;
+  -webkit-animation: logoAnimation 5s ease-in-out infinite alternate;
+          animation: logoAnimation 5s ease-in-out infinite alternate;
+}
+
+@media (max-width: 768px){
+  #animiertes-logo{
+    display: none;
+  }
+}
+
+
+/* === LEISTUNGEN-BEREICH === */
+
+#leistungen-bereich{
+  padding-top: 1rem;
+}
+
+.leistungs-teaser-box{
+  background: #3D3F45;
+  text-align: center;
+  color: #FFF;
+  padding: 1rem 3rem 2.5rem;
+  width: 60%;
+  margin-bottom: 1.6rem;
+}
+
+#leistungen-bereich .row > .col-3:nth-of-type(even) > .leistungs-teaser-box{
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+#leistungen-bereich .row > .col-3:nth-of-type(odd) > .leistungs-teaser-box{
+  margin-right: 1rem;
+  margin-left: auto;
+}
+
+.leistungs-teaser-box > h2{
+  font-size: 1.4rem;
+}
+
+.leistung-ansehen-btn{
+  text-decoration: none;
+  height: 40px;
+  display: inline-block;
+  padding-top: .5rem;
+  width: 40%;
+  min-width: 100px;
+  margin-top: 1rem;
+  /* Das Ankerelement, welches ein Link ist, wird hier zu einem Button gestylt! */
+}
+
+.leistung-ansehen-btn:link{
+  color: #FFF;
+}
+
+.leistung-ansehen-btn:visited{
+  color: #FFF;
+}
+
+.leistung-ansehen-btn:active{
+  color: #FFF;
+}
+
+.leistung-ansehen-btn:hover{
+  color: #A62C21;
+  border: 2px solid #A62C21;
+}
+
+@media (max-width: 1366px){
+
+  .leistungs-teaser-box{
+    width: 80%;
+  }
+}
+
+
+@media (max-width: 1024px){
+
+  .leistungs-teaser-box{
+    width: 100%;
+    margin-bottom: .6rem;
+  }
+
+
+  #leistungen-bereich .row > .col-3:nth-of-type(even) > .leistungs-teaser-box{
+    margin-left: .5rem;
+  }
+
+  #leistungen-bereich .row > .col-3:nth-of-type(odd) > .leistungs-teaser-box{
+    margin-right: .5rem;
+  }
+}
+
+
+@media (max-width: 768px){
+
+  #leistungen-bereich .row > .col-3:nth-of-type(even) > .leistungs-teaser-box{
+    margin-left: 0;
+  }
+
+  #leistungen-bereich .row > .col-3:nth-of-type(odd) > .leistungs-teaser-box{
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .leistungs-teaser-box{
+    padding: 1rem 1.5rem 2.5rem;
+  }
+}
+
+
+  /* === Video-Bereich === */
+
+#video-bereich{
+  background-color: #3D3F45;
+  color: #FFF;
+}
+
+#video-bereich video{
+  width: 35%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+@media (max-width: 1440px) {
+
+  #video-bereich video{
+    width: 45%;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  #video-bereich video{
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  #video-bereich video{
+    width: 75%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  #video-bereich video{
+    width: 100%;
+  }
+}
+
+
+  /* === Service-Bereich === */
+
+#service-bereich{
+  background-color: #F0F0F0;
+}
+
+.service-box{
+  text-align: center;
+  width: 80%;
+}
+
+.service-box h1{
+  font-size: 1.4rem;
+}
+
+#service-bereich .row:nth-of-type(2) > .col-2:first-of-type > .service-box{
+  margin-right: 0;
+  margin-left: auto;
+}
+
+#service-bereich .row:nth-of-type(2) > .col-2:nth-of-type(2) > .service-box{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media(max-width: 768px){
+
+  #service-bereich > .container > .row:nth-of-type(2) > .col-2 > .service-box{
+   margin-right: auto;
+   margin-left: auto;
+ }
+
+  /* #service-bereich .row:nth-of-type(2) > .col-2:first-of-type > .service-box{
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  #service-bereich .row:nth-of-type(2) > .col-2:nth-of-type(3) > .service-box{
+    margin-right: auto;
+    margin-left: auto;
+  } */
+}
+
+@media (max-width: 480px){
+
+  .service-box{
+    width: 100%;
+  }
+}
+
+.service-icon{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 1s;
+}
+
+.service-icon:hover{
+  transform: rotateZ(360deg);
+}
+
+#guenstig-icon{
+  background: #3D3F45 url("./../img/services-sprite.png")0 0;
+}
+
+#schnell-icon{
+  background: #3D3F45 url("./../img/services-sprite.png") -120px 0;
+}
+
+#modern-icon{
+  background: #3D3F45 url("./../img/services-sprite.png") -240px 0;
+}
+
+
+/* === Über-uns-Bereich === */
+
+#ueber-uns-bereich{
+  background-color: #FFF;
+}
+
+#ueber-uns-container{
+  position: relative;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ueber-uns-container p{
+  margin-top: 0;
+}
+
+#ueber-uns-container >img{
+  position: absolute;
+  top: 0;
+  right: 100px;
+  height: 100%;
+}
+
+#ueber-uns-container > p{
+  width: 75%;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1440px){
+
+  #ueber-uns-container >img{
+    right: 50px;
+  }
+}
+
+@media (max-width: 1280px){
+
+  #ueber-uns-container >img{
+    right: 0px;
+  }
+}
+
+@media (max-width: 1140px){
+
+  #ueber-uns-container > p{
+    width: 70%;
+  }
+}
+
+@media (max-width: 1024px){
+
+  #ueber-uns-container > p{
+    width: 100%;
+  }
+
+  #ueber-uns-container >img{
+    display: none;
+  }
+}
+
+
+  /* === FOOTER === */
+
+#footer{
+  background-color: #3D3F45;
+  height: 2.8rem;
+  color: #FFF;
+}
+
+#footer-nav{
+  display: inline-block;
+  float: right;
+}
+
+#footer-nav a{
+  text-decoration: none;
+  color: #FFF;
+}
+
+#footer-nav a:link{
+  color: #FFF;
+}
+
+#footer-nav a:visited{
+  color: #FFF;
+}
+
+#footer-nav a:active{
+  color: #FFF;
+
+}
+
+#footer-nav a:hover{
+  color: #F0F0F0;
+}
+
+@media(max-width: 565px){
+
+  #footer span{
+    display: none;
+  }
+}
+
+
+/* === Leistungen-Seite === */
+
+.leistung{
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.leistung:nth-of-type(even){
+  background-color: #F0F0F0;
+}
+
+.flex-container{
+  display: flex;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-around;
+  /* Gibt den Inhalt (die leistungs-boxen) mit platz zwischen den einzelnen boxen
+  an. */
+  align-items: center;
+  /* Alle items sollen in der horizontalen mitte der items zentriert werden. */
+}
+
+.flex-container > .intro-container{
+  width: 100%;
+}
+
+.leistungs-box{
+  background-color: #3D3F45;
+  color: #FFF;
+  padding: 2rem 4rem;
+  text-align: center;
+  min-height: 600px;
+  display: flex;
+  /* Die boxen ordnen ihren inhalt jetzt nebeneinander an. */
+  flex-direction: column;
+  /* Die Darstellung, des Inhaltes, in den boxen wird hier von row auf column gesetzt
+  damit der Inhalt nicht mehr nebeneinander dargestellt wird sondern untereinander.  */
+  flex-basis: 25%;
+  /* Gibt die breite der Boxen an. */
+  align-items: center;
+  /* Die items, in diesem Fall nur der button, werden nicht mehr mit dem default Wert
+  stretch dargestellt sondern zentriert. */
+  justify-content: space-between;
+  /* Der Inhalt der boxen (überschrift, text und button) werden jetzt mit gleichmäßigem
+  Abstand nach allen seiten dargestellt.  */
+}
+
+.leistungs-box-empfohlen{
+  flex-basis: 27.5%;
+  min-height: 720px;
+  box-shadow: 0 0 20px 0 #3D3F45;
+  font-size: 1.05rem;
+}
+
+
+.leistungs-box h1{
+  margin-bottom: 0;
+  margin-top: 1.5rem;
+}
+
+.leistungs-box ul{
+  padding: 0;
+}
+
+.leistungs-box ul > li{
+list-style-position: inside;
+margin-bottom: .5rem;
+}
+
+.leistung-auswaehlen-btn{
+  width: 50%;
+  height: 2.5rem;
+  font-size: 1rem;
+  margin-top: .5rem;
+  margin-bottom: 1.5rem;
+  min-width: 170px;
+}
+
+@media (max-width: 1782px){
+
+  .leistungs-box{
+    flex-basis: 27.5%;
+  }
+
+  .leistungs-box-empfohlen{
+    flex-basis: 32.5%;
+  }
+}
+
+@media (max-width: 1622px){
+
+  .leistungs-box{
+    flex-basis: 30%;
+  }
+
+  .leistungs-box-empfohlen{
+    flex-basis: 32.5%;
+  }
+}
+
+@media (max-width: 1488px){
+
+  .leistungs-box{
+    padding: 1rem 2rem;
+  }
+
+  .flex-container{
+    align-items: stretch;
+  }
+
+  .leistungs-box-empfohlen{
+    min-height: initial;
+  }
+}
+
+@media (max-width: 1366px){
+
+  .flex-container{
+    width: 90%;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (max-width: 1088px){
+
+  .flex-container{
+    flex-direction: column;
+    width: 80%;
+    padding: 0;
+  }
+
+  .leistungs-box{
+    margin-bottom: 2rem;
+    min-height: initial;
+    /* Stellt ein das die Boxen nur noch so groß sind wie sie groß sein müssen. Die
+    einstellung der min-height wurde damit aufgehoben. */
+  }
+
+  .flex-container{
+    padding: 0;
+  }
+}
+
+@media (max-width: 1024px){
+
+  .flex-container{
+    width: 95%;
+  }
+}
+
+@media (max-width: 768px){
+
+  .flex-container{
+    width: 90%;
+  }
+}
+
+@media (max-width: 409px){
+
+  .leistungs-box{
+    padding: 1rem 2rem;
+  }
+}
+
+@media (max-width: 338px){
+
+  .leistungs-box{
+    padding: .5rem 1rem 2rem 1rem;
+  }
+}
+
+
+/* === Kontakt-Seite === */
+
+#kontakt-bereich{
+  padding-top: 1rem;
+}
+
+#kontakt-formular input,
+#kontakt-formular textarea{
+  width: 100%;
+  border: 2px solid #3D3F45;
+  padding: .5rem;
+  font-size: 1rem;
+  font-family: 'Raleway', 'Lato', 'Helvetica Neue', 'Arial', sans-serif;
+  color: #3D3F45;
+  transition: border .5s ease-in-out;
+}
+
+#kontakt-formular textarea{
+  height: 100px;
+}
+
+#kontakt-formular input:hover,
+#kontakt-formular textarea:hover{
+  border: 2px solid #A62C21;
+}
+
+#kontakt-formular input:focus,
+#kontakt-formular textarea:focus,
+#kontakt-formular #absendenButton:focus{
+  border: 2px solid #A62C21;
+  transition: none;
+}
+
+#absendenButton{
+  width: 150px;
+  height: 39px;
+}
+
+#kontakt-formular{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 1366px){
+
+  #kontakt-formular{
+    width: 90%;
+  }
+}
+
+@media (max-width: 1024px){
+
+  #kontakt-formular{
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px){
+
+  #kontakt-formular button{
+    width: 100%;
+  }
+}
+
+
+/* === Impressum === */
+
+#impressum{
+  padding-top: 1rem;
+}
+
+#impressum a{
+  color: #3D3F45;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+/* ===GRID-System=== */
+
+.container{
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  /* background: red; */
+/* Um den Container anzeigen zu lassen die background-color aktivieren.*/
+}
+
+.row::after{
+  content: "";
+  clear: both;
+  display: block;
+}
+
+[class*='col-']{
+  float: left;
+  min-height: 1px;
+  padding: .8rem;
+}
+
+.col-1 { width: 16.666%; }
+.col-2 { width: 33.33%;  }
+.col-3 { width: 50%;     }
+.col-4 { width: 66.666%; }
+.col-6 { width: 100%;    }
+
+
+/* ===GRID-System (Sichtbarkeit)===
+
+.border, .border *{
+  border: 1px solid #91C4FF;
+}
+
+[class*='col-'] {
+  background: #BFDDFF;
+}
+
+p{
+  background: #91C4FF;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #FFF;
+} --- */
+
+
+
+/* Wichtige Breakpoints
+
+320   px   iPhone Hochformat
+480   px   iPhone Querformat
+768   px   iPad Hochformat
+1024  px   iPad Querformat
+1200  px   Laptop
+>1200 px   große Endgeräte (Desktop, TV)
+ */
+
+@media (max-width: 1024px){
+  .col-1 { width: 33.33%; }
+}
+
+@media (max-width: 768px){
+  .col-1 { width: 50%;  }
+  .col-2 { width: 100%; }
+  .col-3 { width: 100%; }
+  .col-4 { width: 100%; }
+
+}
+
+@media (max-width: 480px){
+  .col-1 { width: 100%; }
+  .col-2 { width: 100%; }
+  .col-3 { width: 100%; }
+  .col-4 { width: 100%; }
+}
